@@ -1,0 +1,16 @@
+.light-theme {
+    --text-color: black;
+    background-color: white;
+    --background-color: white;
+    --container-color:rgb(245, 245, 245)
+}
+
+.dark-theme {
+    --text-color: white;
+    background-color: black;
+    --background-color: black;
+    --container-color: rgb(19, 19, 19);
+    --divider-color: rgb(67, 65, 65);
+    --container-color-dark: rgb(28, 27, 27);
+    color: white;
+}

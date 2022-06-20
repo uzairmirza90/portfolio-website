@@ -1,0 +1,31 @@
+@import '../../styles/scss/mixins';
+
+.project {
+    @include flex(row);
+    padding: 20px;
+    background-color: var(--container-color);
+    border-radius: 22px;
+    gap: 25px;
+    margin-bottom: 50px;
+   .project-number-container {
+       .project-number {
+           font-size: 20px;
+           font-weight: 600;
+           color: rgba(48, 135, 113, 0.837)
+       }
+   }
+
+   .project-details {
+       @include flex(column);
+       gap: 20px;
+       .project-title {
+           font-size: 22px;
+           font-weight: 700;
+           color: rgba(63, 161, 136, 0.837)
+       }
+
+       .project-tech {
+           font-size: 16px;
+       }
+   }
+}

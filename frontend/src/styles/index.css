@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@200;400;500;600;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Sora', sans-serif;
+}
+
+.container {
+  margin-top: 45px;
+  margin-bottom: 80px;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--container-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}

@@ -1,0 +1,72 @@
+@import '../../styles/scss/variables';
+@import '../../styles/scss/mixins';
+
+.introduction {
+    @include flexJustifyAlign(row);
+    gap: 30px;
+    background-color: var(--container-color);
+    border-radius: 20px;
+    padding: 40px;
+    .intro-text-container {
+        @include flex(column);
+        gap: 20px;
+        .intro-text-1 {
+            font-size: 20px;
+            color: var(--text-color)
+        }
+
+        .intro-text-2 {
+            font-size: 50px;
+            color: var(--text-color)
+        }
+
+        .intro-text-3 {
+            font-size: 25px;
+            color: $hover_color
+        }
+
+        .intro-text-4 {
+            font-size: 16px;
+            color: var(--text-color)
+        }
+
+        .buttons {
+            @include flex(row);
+            gap: 40px;
+
+            .button {
+                width: 120px;
+                height: 40px;
+                border-radius: 6px;
+                background-color: $hover_color;
+                color: white;
+                font-weight: 600;
+                font-size: 15px;
+                border: none
+            }
+        }
+    }
+
+    .intro-image-container {
+        .intro-image {
+            width: 400px;
+            border-radius: 50%;
+        }
+    }
+}
+
+@media  only screen and (max-width: 900px) {
+    .introduction {
+        @include flexJustifyAlign(column);
+
+        .intro-text-container {
+            @include flexJustifyAlign(column)
+        }
+
+        .intro-image-container{
+            .intro-image {
+                width: 300px;
+            }
+        }
+    }
+}

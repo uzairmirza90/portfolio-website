@@ -1,0 +1,5 @@
+@import '../../styles/scss/mixins';
+
+.tabs-container {
+    @include flexJustifyAlign(column)
+}

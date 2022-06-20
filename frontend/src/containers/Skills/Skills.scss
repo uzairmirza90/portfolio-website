@@ -1,0 +1,13 @@
+@import '../../styles/scss/mixins';
+@import '../../styles/scss/variables';
+
+.skills {
+    @include flexJustifyAlign(column);
+    gap: 50px;
+
+    .skills-container {
+        @include flexJustifyAlign(row);
+        flex-wrap: wrap;
+        gap: 50px;
+    }
+}

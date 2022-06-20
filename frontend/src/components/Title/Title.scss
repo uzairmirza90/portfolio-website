@@ -1,0 +1,19 @@
+.title {
+    .title-text {
+        font-size: 26px;
+        font-weight: 600;
+        color: var(--text-color);
+
+        .lio {
+            color: rgb(58, 179, 145)
+        }
+    }
+}
+
+@media  only screen and (max-width: 1000px) {
+    .title {
+        .title-text {
+            display: none;
+        }
+    }
+}

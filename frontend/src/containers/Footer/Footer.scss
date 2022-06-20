@@ -1,0 +1,27 @@
+@import '../../styles/scss/mixins';
+@import '../../styles/scss/variables';
+
+.footer {
+    @include flexAlign(row);
+    bottom: 0;
+    width:100%;
+    justify-content: space-between;
+    padding: $padding-nav-footer;
+    margin-top: 100px;
+    
+    .footer-copyright {
+        justify-self: center
+    }
+    .footer-icons {
+        @include flex(row);
+        gap: 20px;
+    }
+}
+
+@media  only screen and (max-width: 900px) {
+    .footer {
+        @include flexJustifyAlign(column);
+        padding: $padding-nav-footer-small;
+        gap: 20px;
+    }
+}

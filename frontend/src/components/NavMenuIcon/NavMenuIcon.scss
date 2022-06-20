@@ -1,0 +1,11 @@
+@import '../../styles/scss/mixins';
+
+.nav-icon {
+  display: none;
+}
+
+@media only screen and (max-width: 1200px) {
+  .nav-icon {
+    @include flexJustifyAlign(row);
+  }
+}

@@ -1,0 +1,21 @@
+@import '../../styles//scss/mixins';
+
+.heading-container {
+    @include flexJustifyAlign(column);
+    margin-top: 40px;
+    .heading-text {
+        font-size: 32px;
+        color: var(--text-color)
+    }
+}
+
+@media  only screen and (max-width: 1000px) {
+    .heading-container {
+        @include flexJustifyAlign(column);
+        margin-top: 40px;
+        .heading-text {
+            font-size: 30px;
+            color: var(--text-color)
+        }
+    }
+}
