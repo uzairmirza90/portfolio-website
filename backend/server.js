@@ -1,4 +1,17 @@
 const express = require('express')
-const app = express()
+const dotenv = require('dotenv')
+const connectDB = require('./config/db')
+const userRoutes = require('./routes/userRoutes')
 
-app.listen(6000, console.log('Server is running'))
+const app = express()
+dotenv.config()
+connectDB()
+
+app.get('/', (req, res, next) => {
+    res.send('Api is running')
+})
+
+app.use('/api/users', userRoutes)
+
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, console.log('Server is running'));
