@@ -22,6 +22,8 @@ export interface IntroductionInterface {
     description: string;
 }
 
+
+
 export interface SkillInterface {
     image: string,
     text: string,
@@ -43,3 +45,5 @@ export interface ProjectsInterface {
         technologies: string[]
     }[]
 }[]
+
+

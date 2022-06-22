@@ -45,7 +45,7 @@ const NavMenuIcon = () => {
               sx={{
                 width: 200,
                 height: 55,
-                backgroundColor: "var(--container-color)",
+                backgroundColor: "var(--nav-menu-container)",
               }}
             >
               <NavItem text={item.text} path={item.path} />
