@@ -33,7 +33,6 @@ export const Nav_Menu: NavMenuItemInterface[] = [
   { text: "Videos", path: "/videos" },
   { text: "About", path: "/about" },
   { text: "Log In", path: "/login" },
-  { text: "Sign Up", path: "/signup" },
 ];
 
 //  Introduction Container

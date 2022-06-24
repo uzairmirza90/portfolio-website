@@ -9,9 +9,18 @@ import NavMenuIcon from "../../components/NavMenuIcon/NavMenuIcon";
 import { Divider } from "@mui/material";
 import ThemeSwitch from "../../components/ThemeSwitch/ThemeSwitch";
 import { useNavigate } from "react-router-dom";
+import { NavMenuItemInterface } from "../../utils/interfaces/interfaces";
 
 const Navbar: React.FC = () => {
+  const [userName, setUserName] = React.useState<string>("")
   const navigate = useNavigate()
+
+  React.useEffect(() => {
+    if(localStorage.getItem('userInfo')){
+      setUserName(JSON.parse(localStorage.getItem("userInfo") || "").name)
+    }
+  }, [])
+  
   return (
     <>
     <nav className="navbar">
@@ -24,7 +33,8 @@ const Navbar: React.FC = () => {
           />
       </div>
       <div className="nav-items">
-        {Nav_Menu?.map((item, index: number) => {
+        
+        {Nav_Menu?.map((item: NavMenuItemInterface, index: number) => {
           return <NavItem 
             key={index} 
             text={item.text} 
