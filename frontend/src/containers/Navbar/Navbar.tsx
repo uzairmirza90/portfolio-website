@@ -10,42 +10,83 @@ import { Divider } from "@mui/material";
 import ThemeSwitch from "../../components/ThemeSwitch/ThemeSwitch";
 import { useNavigate } from "react-router-dom";
 import { NavMenuItemInterface } from "../../utils/interfaces/interfaces";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 
 const Navbar: React.FC = () => {
-  const [userName, setUserName] = React.useState<string>("")
-  const navigate = useNavigate()
+  const [userName, setUserName] = React.useState<string>("");
+  const navigate = useNavigate();
+
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+
+  const logoutUser = () => {
+    localStorage.removeItem('userInfo')
+    handleClose()
+    setUserName('')
+  }
+
 
   React.useEffect(() => {
-    if(localStorage.getItem('userInfo')){
-      setUserName(JSON.parse(localStorage.getItem("userInfo") || "").name)
+    if (localStorage.getItem("userInfo")) {
+      setUserName(JSON.parse(localStorage.getItem("userInfo") || "").name);
+    }else {
+      setUserName('')
     }
-  }, [])
-  
+  }, [localStorage.getItem("userInfo")]);
+
   return (
     <>
-    <nav className="navbar">
-      <div className="title-container" onClick={() => navigate("/")}>
-        <Logo 
-          logoImage={logoImage} 
-          />
-        <Title 
-          text="Portfolio"
-          />
-      </div>
-      <div className="nav-items">
-        
-        {Nav_Menu?.map((item: NavMenuItemInterface, index: number) => {
-          return <NavItem 
-            key={index} 
-            text={item.text} 
-            path={item.path}
-            />;
-        })}
-        <ThemeSwitch />
-      </div>
-      <NavMenuIcon />
-    </nav>
-    <Divider sx={{backgroundColor: 'var(--divider-color)'}}/>
+      <nav className="navbar">
+        <div className="title-container" onClick={() => navigate("/")}>
+          <Logo logoImage={logoImage} />
+          <Title text="Portfolio" />
+        </div>
+        <div className="nav-items">
+          {Nav_Menu?.map((item: NavMenuItemInterface, index: number) => {
+            if (item.text === "Log In" && userName !== "") {
+              return (
+                <div>
+                  <Button
+                    id="basic-button"
+                    aria-controls={open ? "basic-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? "true" : undefined}
+                    onClick={handleClick}
+                  >
+                    {userName}
+                  </Button>
+                  <Menu
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    MenuListProps={{
+                      "aria-labelledby": "basic-button",
+                    }}
+                  >
+                    <MenuItem onClick={handleClose}>Profile</MenuItem>
+                    <MenuItem onClick={() => logoutUser()}>Logout</MenuItem>
+                  </Menu>
+                </div>
+              );
+            } else {
+              return <NavItem key={index} text={item.text} path={item.path} />;
+            }
+          })}
+          <ThemeSwitch />
+        </div>
+        <NavMenuIcon />
+      </nav>
+      <Divider sx={{ backgroundColor: "var(--divider-color)" }} />
     </>
   );
 };
