@@ -13,6 +13,7 @@ import { NavMenuItemInterface } from "../../utils/interfaces/interfaces";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const Navbar: React.FC = () => {
   const [userName, setUserName] = React.useState<string>("");
@@ -57,11 +58,19 @@ const Navbar: React.FC = () => {
               return (
                 <div>
                   <Button
+                    variant="contained" endIcon={<KeyboardArrowDownIcon />}
                     id="basic-button"
                     aria-controls={open ? "basic-menu" : undefined}
                     aria-haspopup="true"
                     aria-expanded={open ? "true" : undefined}
                     onClick={handleClick}
+                    sx={{
+                      backgroundColor: 'rgba(58, 173, 144, 0.837)',
+                      fontWeight: '800',
+                      '&:hover': {
+                        backgroundColor: 'rgba(58, 173, 144, 0.837)'
+                      }
+                    }}
                   >
                     {userName}
                   </Button>

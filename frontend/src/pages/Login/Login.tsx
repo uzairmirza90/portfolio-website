@@ -20,7 +20,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 const theme = createTheme();
 
 const Login = () => {
-  const [error, setError] = React.useState<string>("");
+  const [notify, setNotify] = React.useState<string>("");
   const [loggedIn, setLoggedIn] = React.useState<boolean>(false);
 
   const navigate = useNavigate();
@@ -34,11 +34,11 @@ const Login = () => {
       userFormData.get("email") === "" &&
       userFormData.get("password") === ""
     ) {
-      setError("Fields should not be empty");
+      setNotify("Fields should not be empty");
     } else if (userFormData.get("email") === "") {
-      setError("Please enter your email");
+      setNotify("Please enter your email");
     } else if (userFormData.get("password") === "") {
-      setError("Please enter your password");
+      setNotify("Please enter your password");
     } else {
       try {
         const userApiData: AxiosResponse = await axios.post(
@@ -53,7 +53,7 @@ const Login = () => {
             },
           }
         );
-        setError("Login Successful!");
+        setNotify("Login Successful!");
         setLoggedIn(true);
         localStorage.setItem("userInfo", JSON.stringify(userApiData.data));
 
@@ -62,7 +62,7 @@ const Login = () => {
         }, 4000);
 
       } catch (error: any) {
-        setError(error.response.data.message);
+        setNotify(error.response.data.message);
         console.log(error.response.data.message);
         setLoggedIn(false);
       }
@@ -94,10 +94,10 @@ const Login = () => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          {error !== "" ? (
-            <Alert severity={loggedIn ? "success" : "error"}>{error}</Alert>
+          {notify !== "" ? (
+            <Alert severity={loggedIn ? "success" : "error"}>{notify}</Alert>
           ) : (
-            error
+            notify
           )}
           {loggedIn ? (
             <Box sx={{ display: "flex", marginTop: 15 }}>
@@ -119,7 +119,7 @@ const Login = () => {
                 name="email"
                 autoComplete="email"
                 autoFocus
-                onChange={() => setError("")}
+                onChange={() => setNotify("")}
               />
               <TextField
                 margin="normal"
@@ -130,7 +130,7 @@ const Login = () => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                onChange={() => setError("")}
+                onChange={() => setNotify("")}
               />
               <Button
                 type="submit"
