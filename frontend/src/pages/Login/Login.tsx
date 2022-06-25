@@ -13,9 +13,17 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Logo from "../../components/Logo/Logo";
 import loginImage from "../../assets/images/logo.jpg";
 import axios, { AxiosResponse } from "axios";
-import { Navigate, useNavigate, Link } from "react-router-dom";
+import { Navigate, useNavigate, Link, NavigateFunction } from "react-router-dom";
 import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
+import {
+  ENTER_EMAIL,
+  ENTER_PASSWORD,
+  FIELDS_SHOULD_NOT_EMPTY,
+  LOCAL_STORAGE_INFO,
+  LOGIN_API_URL,
+  LOGIN_SUCCESS,
+} from "../../utils/constants/constants";
 
 const theme = createTheme();
 
@@ -30,22 +38,22 @@ const Login = () => {
 
     const userFormData: FormData = new FormData(event.currentTarget);
 
-    if (
-      userFormData.get("email") === "" &&
-      userFormData.get("password") === ""
-    ) {
-      setNotify("Fields should not be empty");
-    } else if (userFormData.get("email") === "") {
-      setNotify("Please enter your email");
-    } else if (userFormData.get("password") === "") {
-      setNotify("Please enter your password");
+    const email: FormDataEntryValue | null = userFormData.get('email')
+    const password: FormDataEntryValue | null = userFormData.get('password')
+
+    if (email === "" && password === "") {
+      setNotify(FIELDS_SHOULD_NOT_EMPTY);
+    } else if (email === "") {
+      setNotify(ENTER_EMAIL);
+    } else if (password === "") {
+      setNotify(ENTER_PASSWORD);
     } else {
       try {
         const userApiData: AxiosResponse = await axios.post(
-          "/api/users/login",
+          LOGIN_API_URL,
           {
-            email: userFormData.get("email"),
-            password: userFormData.get("password"),
+            email: email,
+            password: password,
           },
           {
             headers: {
@@ -53,14 +61,16 @@ const Login = () => {
             },
           }
         );
-        setNotify("Login Successful!");
+        setNotify(LOGIN_SUCCESS);
         setLoggedIn(true);
-        localStorage.setItem("userInfo", JSON.stringify(userApiData.data));
+        localStorage.setItem(
+          LOCAL_STORAGE_INFO,
+          JSON.stringify(userApiData.data)
+        );
 
         setTimeout(() => {
           navigate("/profile");
-        }, 4000);
-
+        }, 3000);
       } catch (error: any) {
         setNotify(error.response.data.message);
         console.log(error.response.data.message);
@@ -70,9 +80,11 @@ const Login = () => {
   };
 
   React.useEffect(() => {
-    if (localStorage.getItem("userInfo")) {
+    if (localStorage.getItem(LOCAL_STORAGE_INFO)) {
       navigate("/profile");
-      console.log(JSON.parse(localStorage.getItem("userInfo") || "").name);
+      console.log(
+        JSON.parse(localStorage.getItem(LOCAL_STORAGE_INFO) || "").name
+      );
     }
   }, [navigate]);
 
@@ -95,14 +107,14 @@ const Login = () => {
             Sign in
           </Typography>
           {notify !== "" ? (
-            <Alert severity={loggedIn ? "success" : "error"}>{notify}</Alert>
+            <Alert severity={loggedIn ? "success" : "error"} sx={{width: '100%'}}>{notify}</Alert>
           ) : (
             notify
           )}
           {loggedIn ? (
             <Box sx={{ display: "flex", marginTop: 15 }}>
-              <CircularProgress size={60} />
-            </Box>
+            <CircularProgress size={60} />
+          </Box>
           ) : (
             <Box
               component="form"

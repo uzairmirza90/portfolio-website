@@ -15,12 +15,22 @@ import axios from "axios";
 import { styled } from "@mui/material/styles";
 import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
-
+import {
+  ENTER_CONFIRM_PASSWORD,
+  ENTER_EMAIL,
+  ENTER_NAME,
+  ENTER_PASSWORD,
+  FIELDS_SHOULD_NOT_EMPTY,
+  LOCAL_STORAGE_INFO,
+  PASSWORDS_NOT_MATCH,
+  REGISTER_API_URL,
+  REGISTER_SUCCESS,
+} from "../../utils/constants/constants";
 
 const theme = createTheme();
 
 const SignUp = () => {
-  const [error, setError] = React.useState<string>("");
+  const [notify, setNotify] = React.useState<string>("");
   const [loggedIn, setLoggedIn] = React.useState<boolean>(false);
 
   const navigate = useNavigate();
@@ -30,33 +40,29 @@ const SignUp = () => {
 
     const userFormData = new FormData(event.currentTarget);
 
-    if (
-      userFormData.get("name") === "" &&
-      userFormData.get("email") === "" &&
-      userFormData.get("password") === "" &&
-      userFormData.get("confirmpassword") === ""
-    ) {
-      setError("Fields should not be empty");
-    } else if (userFormData.get("name") === "") {
-      setError("Please enter you name!");
-    } else if (userFormData.get("email") === "") {
-      setError("Please enter your email");
-    } else if (userFormData.get("password") === "") {
-      setError("Please enter you password");
-    } else if (userFormData.get("confirmpassword") === "") {
-      setError("Please enter you confirm password");
-    } else if (
-      userFormData.get("password") !== userFormData.get("confirmpassword")
-    ) {
-      setError("Passwords do not match!");
+    const name: FormDataEntryValue | null = userFormData.get("name");
+    const email: FormDataEntryValue | null = userFormData.get("email");
+    const password: FormDataEntryValue | null = userFormData.get("password");
+    const confirmPassword: FormDataEntryValue | null = userFormData.get("confirmpassword");
+
+    if (name === "" && email === "" && password === "" && confirmPassword === "") {
+      setNotify(FIELDS_SHOULD_NOT_EMPTY);
+    } else if (name === "") {
+      setNotify(ENTER_NAME);
+    } else if (email === "") {
+      setNotify(ENTER_EMAIL);
+    } else if (password === "") {
+      setNotify(ENTER_PASSWORD);
+    } else if (confirmPassword === "") {
+      setNotify(ENTER_CONFIRM_PASSWORD);
+    } else if (password !== confirmPassword) {
+      setNotify(PASSWORDS_NOT_MATCH);
     } else {
       try {
-        const userApiData = await axios.post(
-          "/api/users/register",
-          {
-            name: userFormData.get("name"),
-            email: userFormData.get("email"),
-            password: userFormData.get("password"),
+        const userApiData = await axios.post(REGISTER_API_URL, {
+            name: name,
+            email: email,
+            password: password,
           },
           {
             headers: {
@@ -65,16 +71,14 @@ const SignUp = () => {
           }
         );
         console.log(userApiData.data);
-        setError("Register Successful!");
+        setNotify(REGISTER_SUCCESS);
         setLoggedIn(true);
-        localStorage.setItem("userInfo", JSON.stringify(userApiData.data));
+        localStorage.setItem(LOCAL_STORAGE_INFO, JSON.stringify(userApiData.data));
 
-        setTimeout(() => {
-          navigate("/profile");
-        }, 4000);
+        setTimeout(() => {navigate("/profile")}, 2500);
 
       } catch (error: any) {
-        setError(error.response.data.message);
+        setNotify(error.response.data.message);
         console.log(error.response.data.message);
         setLoggedIn(false);
       }
@@ -82,9 +86,11 @@ const SignUp = () => {
   };
 
   React.useEffect(() => {
-    if (localStorage.getItem("userInfo")) {
+    if (localStorage.getItem(LOCAL_STORAGE_INFO)) {
       navigate("/profile");
-      console.log(JSON.parse(localStorage.getItem("userInfo") || "").name);
+      console.log(
+        JSON.parse(localStorage.getItem(LOCAL_STORAGE_INFO) || "").name
+      );
     }
   }, [navigate]);
 
@@ -106,88 +112,90 @@ const SignUp = () => {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          {error !== "" ? (
-            <Alert severity={loggedIn ? "success" : "error"}>{error}</Alert>
+          {notify !== "" ? (
+            <Alert severity={loggedIn ? "success" : "error"}>{notify}</Alert>
           ) : (
-            error
+            notify
           )}
           {loggedIn ? (
-             <Box sx={{ display: "flex", marginTop: 15 }}>
-             <CircularProgress size={60} />
-           </Box>
-          )
-        : (
-<Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
-          >
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="name"
-                  label="Name"
-                  name="name"
-                  autoComplete="name"
-                 
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                  sx={{
-                    color: 'red'
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="confirmpassword"
-                  label="Confirm Password"
-                  type="password"
-                  id="confirmpassword"
-                  autoComplete="new-confirmpassword"
-                />
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+            <Box sx={{ display: "flex", marginTop: 15 }}>
+              <CircularProgress size={60} />
+            </Box>
+          ) : (
+            <Box
+              component="form"
+              noValidate
+              onSubmit={handleSubmit}
+              sx={{ mt: 3 }}
             >
-              Sign Up
-            </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link to={"/login"}>Already have an account? Sign in</Link>
+              
+                
+                  <TextField
+                  margin="normal"
+                    required
+                    fullWidth
+                    id="name"
+                    label="Name"
+                    name="name"
+                    autoComplete="name"
+                    autoFocus
+                onChange={() => setNotify("")}
+                  />
+                
+                
+                  <TextField
+                  margin="normal"
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    autoComplete="email"
+                    autoFocus
+                onChange={() => setNotify("")}
+                  />
+                
+                  <TextField
+                  margin="normal"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="new-password"
+                    autoFocus
+                onChange={() => setNotify("")}
+                  />
+             
+                  <TextField
+                  margin="normal"
+                    required
+                    fullWidth
+                    name="confirmpassword"
+                    label="Confirm Password"
+                    type="password"
+                    id="confirmpassword"
+                    autoComplete="new-confirmpassword"
+                    autoFocus
+                onChange={() => setNotify("")}
+                  />
+              
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Sign Up
+              </Button>
+              <Grid container justifyContent="flex-end">
+                <Grid item>
+                  <Link to={"/login"}>Already have an account? Sign in</Link>
+                </Grid>
               </Grid>
-            </Grid>
-          </Box>
-        ) 
-        }
-          
+            </Box>
+          )}
         </Box>
       </Container>
     </ThemeProvider>
