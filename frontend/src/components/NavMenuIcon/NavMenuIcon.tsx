@@ -5,6 +5,7 @@ import { Nav_Menu } from "../../utils/data/data";
 import NavItem from "../NavItem/NavItem";
 import "./NavMenuIcon.scss";
 import ThemeSwitch from "../ThemeSwitch/ThemeSwitch";
+import { useNavigate } from "react-router-dom";
 
 const NavMenuIcon = () => {
   const [userName, setUserName] = React.useState<string>("");
@@ -17,10 +18,12 @@ const NavMenuIcon = () => {
     setAnchorEl(null);
   };
 
+  const navigate = useNavigate()
+
   const logoutUser = () => {
     localStorage.removeItem('userInfo')
-    handleClose()
     setUserName('')
+    navigate('/login')
   }
 
   React.useEffect(() => {

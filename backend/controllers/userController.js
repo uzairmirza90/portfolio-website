@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler')
 const generateToken = require('../utils/generateToken')
 
 const registerUser = asyncHandler(async (req, res) => {
-    const {name, email, password, pic} = req.body
+    const {name, email, password } = req.body
 
     const userExists = await User.findOne({email})
 
@@ -14,7 +14,7 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 
     const user = await User.create({
-        name, email, password, pic
+        name, email, password
     })
 
     if(user){
@@ -23,7 +23,6 @@ const registerUser = asyncHandler(async (req, res) => {
             name: user.name,
             email: user.email,
             password: user.password,
-            pic: user.pic,
             isAdmin: user.isAdmin,
             token: generateToken(user._id)
         })
@@ -44,12 +43,11 @@ const loginUser = asyncHandler(async (req, res) => {
             name: user.name,
             email: user.email,
             password: user.password,
-            pic: user.pic,
             isAdmin: user.isAdmin,
             token: generateToken(user._id)
         })
     }else {
-        res.status(400).json({message: 'Invalid Email or Password'})
+        res.status(400).json({message: 'Invalid Email or Password!'})
         throw new Error('User Not Found')
     }
 })

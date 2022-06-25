@@ -32,6 +32,7 @@ const Navbar: React.FC = () => {
     localStorage.removeItem('userInfo')
     handleClose()
     setUserName('')
+    navigate('/login')
   }
 
 

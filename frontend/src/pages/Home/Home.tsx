@@ -6,6 +6,7 @@ import '../Home/Home.scss'
 const Home = () => {
   return (
     <div>
+      
         <Introduction />
         <Skills />
     </div>
