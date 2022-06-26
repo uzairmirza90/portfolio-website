@@ -14,6 +14,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { LOCAL_STORAGE_INFO } from "../../utils/constants/constants";
 
 const Navbar: React.FC = () => {
   const [userName, setUserName] = React.useState<string>("");
@@ -31,7 +32,7 @@ const Navbar: React.FC = () => {
 
 
   const logoutUser = () => {
-    localStorage.removeItem('userInfo')
+    localStorage.removeItem(LOCAL_STORAGE_INFO)
     handleClose()
     setUserName('')
     navigate('/login')
@@ -44,7 +45,7 @@ const Navbar: React.FC = () => {
     }else {
       setUserName('')
     }
-  }, [localStorage.getItem("userInfo")]);
+  }, [navigate]);
 
   return (
     <>

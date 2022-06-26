@@ -64,7 +64,7 @@ const ThemeSwitch: React.FC = () => {
 
   React.useEffect(() => {
     document.body.className = theme
-  }, [theme])
+  }, [checked])
 
 //   React.useEffect(() => {
 //       if(JSON.parse(localStorage.getItem('theme') || "") === theme){

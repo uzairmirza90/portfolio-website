@@ -14,3 +14,4 @@ export const LOGIN_API_URL: string = "/api/users/login"
 export const REGISTER_API_URL: string = "/api/users/register"
 
 export const LOCAL_STORAGE_INFO: string = "userInfo"
+export const LS_GET_ITEM: string | null = localStorage.getItem(LOCAL_STORAGE_INFO)
