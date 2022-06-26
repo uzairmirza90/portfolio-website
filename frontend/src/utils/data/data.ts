@@ -299,3 +299,21 @@ export const projectsTab: ProjectsInterface[] = [
     ],
   },
 ];
+
+
+
+
+// Youtube Channel Videos
+export const channelVideos = [
+  "https://www.youtube.com/embed/JnuzZg7FupE",
+  "https://www.youtube.com/embed/lcKk19mZITY",
+  "https://www.youtube.com/embed/xHtyqolFylo",
+  "https://www.youtube.com/embed/Y4nk6-D4RKE",
+  "https://www.youtube.com/embed/ZJqyd2QHcYQ",
+  "https://www.youtube.com/embed/95SVAJQvZao",
+  "https://www.youtube.com/embed/a06V_hpIaY8",
+  "https://www.youtube.com/embed/jGWkrORVl6o",
+  "https://www.youtube.com/embed/Pszpgmp1RM8",
+  "https://www.youtube.com/embed/RLEwjt07mbw",
+  "https://www.youtube.com/embed/UzKVvvW5BU8",
+]
