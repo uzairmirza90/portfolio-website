@@ -6,20 +6,20 @@ import "../Navbar/Navbar.scss";
 import Title from "../../components/Title/Title";
 import { Nav_Menu } from "../../utils/data/data";
 import NavMenuIcon from "../../components/NavMenuIcon/NavMenuIcon";
-import { Divider } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import ThemeSwitch from "../../components/ThemeSwitch/ThemeSwitch";
 import { useNavigate } from "react-router-dom";
 import { NavMenuItemInterface } from "../../utils/interfaces/interfaces";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { LOCAL_STORAGE_INFO } from "../../utils/constants/constants";
+import { Link } from "react-router-dom";
 
 const Navbar: React.FC = () => {
   const [userName, setUserName] = React.useState<string>("");
   const navigate = useNavigate();
-  
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -30,22 +30,20 @@ const Navbar: React.FC = () => {
     setAnchorEl(null);
   };
 
-
   const logoutUser = () => {
-    localStorage.removeItem(LOCAL_STORAGE_INFO)
-    handleClose()
-    setUserName('')
-    navigate('/login')
-  }
-
+    localStorage.removeItem(LOCAL_STORAGE_INFO);
+    handleClose();
+    setUserName("");
+    navigate("/login");
+  };
 
   React.useEffect(() => {
     if (localStorage.getItem("userInfo")) {
       setUserName(JSON.parse(localStorage.getItem("userInfo") || "").name);
-    }else {
-      setUserName('')
+    } else {
+      setUserName("");
     }
-  }, [navigate]);
+  }, [localStorage.getItem("userInfo")]);
 
   return (
     <>
@@ -60,18 +58,19 @@ const Navbar: React.FC = () => {
               return (
                 <div>
                   <Button
-                    variant="contained" endIcon={<KeyboardArrowDownIcon />}
+                    variant="contained"
+                    endIcon={<KeyboardArrowDownIcon />}
                     id="basic-button"
                     aria-controls={open ? "basic-menu" : undefined}
                     aria-haspopup="true"
                     aria-expanded={open ? "true" : undefined}
                     onClick={handleClick}
                     sx={{
-                      backgroundColor: 'rgba(58, 173, 144, 0.837)',
-                      fontWeight: '800',
-                      '&:hover': {
-                        backgroundColor: 'rgba(58, 173, 144, 0.837)'
-                      }
+                      backgroundColor: "rgba(58, 173, 144, 0.837)",
+                      fontWeight: "800",
+                      "&:hover": {
+                        backgroundColor: "rgba(58, 173, 144, 0.837)",
+                      },
                     }}
                   >
                     {userName}
@@ -85,10 +84,35 @@ const Navbar: React.FC = () => {
                       "aria-labelledby": "basic-button",
                     }}
                   >
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
+                    <MenuItem
+                      onClick={() => {
+                        handleClose();
+                        navigate("/profile");
+                      }}
+                    >
+                      Profile
+                    </MenuItem>
                     <MenuItem onClick={() => logoutUser()}>Logout</MenuItem>
                   </Menu>
                 </div>
+              );
+            } else if (item.text === "Log In") {
+              return (
+                <Link className="nav-item" to={`${item.path}`}>
+                  <Button
+                    variant="contained"
+                    onClick={() => navigate(`${item.path}`)}
+                    sx={{
+                      backgroundColor: "rgba(58, 173, 144, 0.837)",
+                      fontWeight: "800",
+                      "&:hover": {
+                        backgroundColor: "rgba(58, 173, 144, 0.837)",
+                      },
+                    }}
+                  >
+                    {item.text}
+                  </Button>
+                </Link>
               );
             } else {
               return <NavItem key={index} text={item.text} path={item.path} />;
