@@ -43,6 +43,7 @@ const Navbar: React.FC = () => {
     } else {
       setUserName("");
     }
+
   }, [localStorage.getItem("userInfo")]);
 
   return (
