@@ -27,7 +27,7 @@ function TabPanel(props: TabPanelProps) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box sx={{ p: 5 }}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -43,7 +43,7 @@ function a11yProps(index: number) {
 }
 
 const Projects: React.FC = () => {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState<number>(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -74,7 +74,7 @@ const Projects: React.FC = () => {
             return (
               <Tab
                 key={index}
-                icon={<img src={projectTab.tabImage} width="30px" alt='Tab'/>}
+                icon={<img src={projectTab.tabImage} width="28px" alt='Tab'/>}
                 iconPosition="start"
                 label={projectTab.label}
                 {...a11yProps(0)}
@@ -85,7 +85,7 @@ const Projects: React.FC = () => {
         </Tabs>
       </Box>
       <ContainerTitle title="Projects I Made" />
-      <Container sx={{ width: 300, marginTop: 2 }}>
+      <Container sx={{ width: 200, marginTop: 2 }}>
         <Divider
           sx={{ backgroundColor: "rgba(58, 173, 144, 0.837)", height: 3 }}
         />

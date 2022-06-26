@@ -63,7 +63,7 @@ const NavMenuIcon = () => {
               sx={{
                 width: 200,
                 height: 55,
-                backgroundColor: "var(--container-color)",
+                backgroundColor: "var(--nav-menu-container)",
               }}
             >
               {item.text === "Log In" && userName !== "" ? (

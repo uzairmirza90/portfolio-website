@@ -24,6 +24,8 @@ import restapi from "../../assets/images/restapi.png";
 import angular from "../../assets/images/angular.png";
 import nextjs from "../../assets/images/nextjs.png";
 
+
+
 //  Nav Menu Items
 export const Nav_Menu: NavMenuItemInterface[] = [
   { text: "Home", path: "/" },
@@ -35,12 +37,18 @@ export const Nav_Menu: NavMenuItemInterface[] = [
   { text: "Log In", path: "/login" },
 ];
 
+
+
+
 //  Introduction Container
 export const introduction: IntroductionInterface = {
-  name: "Uzair Mirza",
+  name: "Name",
   designation: "Full-Stack Developer 👨🏻‍💻",
   description: `I'm a professional Full-Stack Web / App developer based in Pakistan.`,
 };
+
+
+
 
 //  Skills
 export const skills: SkillInterface[] = [
@@ -64,6 +72,9 @@ export const skills: SkillInterface[] = [
   { image: sql, text: "SQL", rating: 50 },
 ];
 
+
+
+
 // Crypto Api Table Header Data
 export const cryptoApiHeader: string[] = [
   "Name",
@@ -78,6 +89,8 @@ export const cryptoApiHeader: string[] = [
   "Ath",
   "Atl",
 ];
+
+
 
 // Projects Tab Data
 export const projectsTab: ProjectsInterface[] = [

@@ -24,6 +24,8 @@ export interface IntroductionInterface {
   description: string;
 }
 
+
+
 export interface SkillInterface {
   image: string;
   text: string;
@@ -61,3 +63,6 @@ export interface UserSignInInterface extends UserAuthInterface {
 export interface UserSignUpInterface extends UserAuthInterface {
   handleRegisterSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
 }
+    
+
+

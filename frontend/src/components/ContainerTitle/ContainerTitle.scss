@@ -2,9 +2,9 @@
 
 .heading-container {
     @include flexJustifyAlign(column);
-    margin-top: 40px;
+    margin-top: 25px;
     .heading-text {
-        font-size: 32px;
+        font-size: 28px;
         color: var(--text-color)
     }
 }

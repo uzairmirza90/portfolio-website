@@ -6,22 +6,22 @@
     gap: 30px;
     background-color: var(--container-color);
     border-radius: 20px;
-    padding: 40px;
+    padding: 30px;
     .intro-text-container {
         @include flex(column);
         gap: 20px;
         .intro-text-1 {
-            font-size: 20px;
+            font-size: 18px;
             color: var(--text-color)
         }
 
         .intro-text-2 {
-            font-size: 50px;
+            font-size: 40px;
             color: var(--text-color)
         }
 
         .intro-text-3 {
-            font-size: 25px;
+            font-size: 22px;
             color: $hover_color
         }
 
@@ -32,7 +32,7 @@
 
         .buttons {
             @include flex(row);
-            gap: 40px;
+            gap: 30px;
 
             .button {
                 width: 120px;
@@ -49,7 +49,7 @@
 
     .intro-image-container {
         .intro-image {
-            width: 400px;
+            width: 370px;
             border-radius: 50%;
         }
     }

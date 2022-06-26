@@ -2,7 +2,8 @@
     --text-color: black;
     background-color: white;
     --background-color: white;
-    --container-color:rgb(245, 245, 245)
+    --container-color:rgb(245, 245, 245);
+    --nav-menu-container: white;
 }
 
 .dark-theme {
@@ -12,5 +13,6 @@
     --container-color: rgb(19, 19, 19);
     --divider-color: rgb(67, 65, 65);
     --container-color-dark: rgb(28, 27, 27);
+    --nav-menu-container: black;
     color: white;
 }
