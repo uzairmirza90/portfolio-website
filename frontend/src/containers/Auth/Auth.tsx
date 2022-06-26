@@ -100,7 +100,7 @@ const Auth: React.FC = () => {
     if (LS_GET_ITEM) {
       navigate("/profile");
     }
-  }, [navigate]);
+  }, [loggedIn]);
 
   return (
     <>

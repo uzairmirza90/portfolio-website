@@ -17,6 +17,20 @@ import Logo from "../Logo/Logo";
 import loginImage from "../../assets/images/logo.jpg";
 import { Theme } from "@mui/system";
 import { UserSignInInterface } from "../../utils/interfaces/interfaces";
+import '../UserSignIn/UserSignIn.scss'
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
+
+const lightTheme = createTheme({
+  palette: {
+    mode: 'light',
+  },
+});
+
 
 const UserSignIn: React.FC<UserSignInInterface> = ({
   notify,
@@ -96,12 +110,11 @@ const UserSignIn: React.FC<UserSignInInterface> = ({
               >
                 Sign In
               </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link to="#">Forgot password?</Link>
-                </Grid>
+              <Grid container justifyContent={'center'}>
                 <Grid item>
-                  <Link to="/signup">{"Don't have an account? Sign Up"}</Link>
+                  <Link to="/signup">
+                    <Typography sx={{color: 'rgba(58, 173, 144, 0.837)'}}>"Don't have an account? Sign Up"</Typography>
+                  </Link>
                 </Grid>
               </Grid>
             </Box>
