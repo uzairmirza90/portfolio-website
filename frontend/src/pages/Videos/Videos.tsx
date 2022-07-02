@@ -4,12 +4,15 @@ import CircularProgress from "@mui/material/CircularProgress";
 import React from "react";
 
 const Videos = () => {
+  const [videos, setVideos] = React.useState<string[]>([])
   const [loading, setLoading] = React.useState<boolean>(true);
+
+  React.useEffect(() => { setVideos(channelVideos) }, [])
 
   React.useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 1000);
   }, []);
 
   return (
@@ -27,9 +30,8 @@ const Videos = () => {
           sx={{ backgroundColor: "rgba(58, 173, 144, 0.837)", height: 3 }}
         />
       </Container>
-      {
-        loading ? (
-          <Box
+      {loading ? (
+        <Box
           sx={{
             display: "flex",
             justifyContent: "center",
@@ -37,38 +39,37 @@ const Videos = () => {
             marginTop: 20,
           }}
         >
-          <CircularProgress size={50} sx={{color: 'rgba(58, 173, 144, 0.837)'}}/>
+          <CircularProgress
+            size={50}
+            sx={{ color: "rgba(58, 173, 144, 0.837)" }}
+          />
         </Box>
-        )
-        :
-        (
-<Container
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          alignItems: "center",
-          justifyContent: "center",
-          marginTop: 4
-        }}
-      >
-        {channelVideos.map((video, index) => {
-          return (
-            <iframe
-              style={{ margin: 30, borderRadius: 20 }}
-              width="500"
-              height="300"
-              src={video}
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-          );
-        })}
-      </Container>
-        )
-      }
-      
+      ) : (
+        <Container
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: 4,
+          }}
+        >
+          {videos.map((video, index) => {
+            return (
+              <iframe
+                style={{ margin: 30, borderRadius: 20 }}
+                width="500"
+                height="300"
+                src={video}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            );
+          })}
+        </Container>
+      )}
     </>
   );
 };

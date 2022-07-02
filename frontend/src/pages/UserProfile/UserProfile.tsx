@@ -16,7 +16,7 @@ const UserProfile = () => {
     if (!localStorage.getItem("userInfo")) {
       navigate("/login");
     }
-  }, [navigate]);
+  }, []);
   return (
     <Box display="flex" justifyContent="center" alignItems="center" mt={10}>
       <div style={{ display: "flex" }}>

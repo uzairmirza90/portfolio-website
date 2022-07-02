@@ -25,12 +25,12 @@ const CryptoApi: React.FC = () => {
         setCryptoData(res.data);
       })
       .catch((err) => console.log(err));
-  }, [apiUrl]);
+  }, []);
 
   React.useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 1500);
   }, []);
 
   return (

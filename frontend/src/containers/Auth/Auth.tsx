@@ -97,10 +97,10 @@ const Auth: React.FC = () => {
   };
 
   React.useEffect(() => {
-    if (LS_GET_ITEM) {
+    if (localStorage.getItem('userInfo')) {
       navigate("/profile");
     }
-  }, [loggedIn]);
+  }, []);
 
   return (
     <>
