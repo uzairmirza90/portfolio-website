@@ -23,6 +23,7 @@ import php from "../../assets/images/php.png";
 import restapi from "../../assets/images/restapi.png";
 import angular from "../../assets/images/angular.png";
 import nextjs from "../../assets/images/nextjs.png";
+import convocationImg from '../../assets/images/convocation.jpg'
 
 
 
@@ -42,8 +43,8 @@ export const Nav_Menu: NavMenuItemInterface[] = [
 
 //  Introduction Container
 export const introduction: IntroductionInterface = {
-  name: "Name",
-  designation: "Full-Stack Developer 👨🏻‍💻",
+  name: "Uzair",
+  designation: "Software Engineer 👨🏻‍💻",
   description: `I'm a professional Full-Stack Web / App developer based in Pakistan.`,
 };
 
@@ -74,6 +75,14 @@ export const skills: SkillInterface[] = [
 
 
 
+
+//  Qualification Data
+export const qualification = {
+  title: `Bachelor's in Computer Science`,
+  year: '2016-2020',
+  cgpa: 3.34,
+  image: convocationImg,
+}
 
 // Crypto Api Table Header Data
 export const cryptoApiHeader: string[] = [

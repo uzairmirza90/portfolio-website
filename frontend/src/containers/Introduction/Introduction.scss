@@ -7,6 +7,7 @@
     background-color: var(--container-color);
     border-radius: 20px;
     padding: 30px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 20.6px;
     .intro-text-container {
         @include flex(column);
         gap: 20px;

@@ -1,5 +1,5 @@
-@import '../../styles/scss/mixins';
-@import '../../styles/scss/variables';
+@import "../../styles/scss/mixins";
+@import "../../styles/scss/variables";
 
 .skill {
     @include flexJustifyAlign(row);
@@ -8,6 +8,7 @@
     padding: 15px;
     border-radius: 20px;
     gap: 20px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 7.6px;
     .skill-image {
         width: 50px;
         border-radius: 20px;
@@ -19,7 +20,7 @@
         .skill-text {
             font-size: 17px;
             font-weight: 500;
-            color: var(--text-color)
+            color: var(--text-color);
         }
     }
 }

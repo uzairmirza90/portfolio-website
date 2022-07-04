@@ -23,7 +23,7 @@ const Skills = () => {
         })}
         </div>
     </div>
-    <Divider sx={{backgroundColor: 'var(--divider-color)'}} />
+    <Divider sx={{backgroundColor: 'var(--divider-color)', marginBottom: 10}} />
     </Container>
   )
 }

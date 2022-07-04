@@ -1,0 +1,32 @@
+.qualification {
+    .qualification-card {
+        padding: 50px;
+        margin-top: 40px;
+        background-color: rgb(182, 222, 211);
+        width: '100%';
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 100px;
+        border-radius: 20px;
+        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        .convo-image {
+            font-size: 140px;
+        }
+        .computer-science {
+            color: rgb(55, 74, 55)
+        }
+    }
+}
+
+@media  only screen and (max-width: 900px) {
+    .qualification {
+        .qualification-card {
+            gap: 30px;
+            .convo-image {
+                font-size: 100px;
+            }
+        }
+    }
+}

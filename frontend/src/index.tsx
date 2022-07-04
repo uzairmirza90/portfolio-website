@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import Navbar from './containers/Navbar/Navbar';
 import Footer from './containers/Footer/Footer';
 import { BrowserRouter } from 'react-router-dom';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,6 +16,7 @@ root.render(
     <BrowserRouter>
     <Navbar />
       <App />
+      <ScrollToTop />
     <Footer />
     </BrowserRouter>
   </React.StrictMode>
