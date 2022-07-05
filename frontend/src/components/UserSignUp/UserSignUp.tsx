@@ -115,7 +115,10 @@ const UserSignUp: React.FC<UserSignUpInterface> = ({
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2, backgroundColor: 'rgba(58, 173, 144, 0.837)' }}
+                sx={{ mt: 3, mb: 2, backgroundColor: 'rgba(58, 173, 144, 0.837)' ,
+                '&:hover': {
+                  backgroundColor: 'rgba(58, 173, 144, 0.837)'
+                }}}
               >
                 Sign Up
               </Button>
