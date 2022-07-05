@@ -11,7 +11,7 @@ const Qualification = () => {
     <Container className="qualification">
       <ContainerTitle title="Qualification" />
       <Box className="qualification-card">
-        <Typography fontSize={30} color={'white'} fontWeight={600}>
+        <Typography fontSize={29} color={'white'} fontWeight={600}>
           {title.slice(0, 13)}
           <span className="computer-science">
             {title.slice(13, 30)} &nbsp;&nbsp; (2017-2021)

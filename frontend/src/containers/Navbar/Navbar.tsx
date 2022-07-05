@@ -43,7 +43,6 @@ const Navbar: React.FC = () => {
     } else {
       setUserName("");
     }
-
   }, [localStorage.getItem("userInfo")]);
 
   return (
@@ -77,7 +76,24 @@ const Navbar: React.FC = () => {
                     {userName}
                   </Button>
                   <Menu
+                    PaperProps={{
+                      style: {
+                        width: 200,
+                        paddingLeft: 10,
+                        paddingRight: 10,
+                        backgroundColor: "var(--container-color)",
+                      },
+                    }}
                     id="basic-menu"
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "right",
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
                     anchorEl={anchorEl}
                     open={open}
                     onClose={handleClose}
@@ -90,10 +106,16 @@ const Navbar: React.FC = () => {
                         handleClose();
                         navigate("/profile");
                       }}
+                      sx={{ height: 60, color: "var(--text-color)" }}
                     >
                       Profile
                     </MenuItem>
-                    <MenuItem onClick={() => logoutUser()}>Logout</MenuItem>
+                    <MenuItem
+                      sx={{ height: 60, color: "var(--text-color)" }}
+                      onClick={() => logoutUser()}
+                    >
+                      Logout
+                    </MenuItem>
                   </Menu>
                 </div>
               );

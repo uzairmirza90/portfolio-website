@@ -1,30 +1,45 @@
 import React from "react";
-import { Button, Menu, MenuItem, Typography } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Button,
+  Container,
+  IconButton,
+  ListItemIcon,
+  Menu,
+  MenuItem,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import DensityMediumOutlinedIcon from "@mui/icons-material/DensityMediumOutlined";
 import { Nav_Menu } from "../../utils/data/data";
-import NavItem from "../NavItem/NavItem";
 import "./NavMenuIcon.scss";
 import ThemeSwitch from "../ThemeSwitch/ThemeSwitch";
 import { useNavigate } from "react-router-dom";
+import CallMadeIcon from "@mui/icons-material/CallMade";
 
 const NavMenuIcon = () => {
   const [userName, setUserName] = React.useState<string>("");
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+    null
+  );
+
+  const navigate = useNavigate();
+
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorElNav(event.currentTarget);
   };
 
-  const navigate = useNavigate()
+  const handleCloseNavMenu = (path: string) => {
+    setAnchorElNav(null);
+    navigate(`${path}`);
+  };
 
   const logoutUser = () => {
-    localStorage.removeItem('userInfo')
-    setUserName('')
-    navigate('/login')
-  }
+    localStorage.removeItem("userInfo");
+    setUserName("");
+    navigate("/login");
+  };
 
   React.useEffect(() => {
     if (localStorage.getItem("userInfo")) {
@@ -37,47 +52,108 @@ const NavMenuIcon = () => {
   return (
     <div className="nav-icon">
       <ThemeSwitch />
-      <Button
-        id="basic-button"
-        aria-controls={open ? "basic-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
-      >
-        <DensityMediumOutlinedIcon sx={{ color: "var(--text-color)" }} />
-      </Button>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          "aria-labelledby": "basic-button",
-        }}
-      >
-        {Nav_Menu.map((item, index) => {
-          return (
-            <MenuItem
-              key={index}
-              onClick={handleClose}
-              sx={{
-                width: 200,
-                height: 55,
-                backgroundColor: "var(--nav-menu-container)",
-              }}
-            >
-              {item.text === "Log In" && userName !== "" ? (
-               <>
-                <Typography>Profile</Typography>
-                <button onClick={() => logoutUser()}>Logout</button>
-               </>
-              ) : (
-                <NavItem text={item.text} path={item.path} />
-              )}
-            </MenuItem>
-          );
-        })}
-      </Menu>
+
+      <Box className="header-container">
+        <AppBar position="static" className="header-bar">
+          <Container maxWidth="xl">
+            <Toolbar disableGutters>
+              <Box>
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleOpenNavMenu}
+                >
+                  <DensityMediumOutlinedIcon sx={{color: 'var(--text-color)'}}/>
+                </IconButton>
+                <Menu
+                  PaperProps={{
+                    style: {
+                      width: "100%",
+                      paddingLeft: 30,
+                      paddingRight: 30,
+                      paddingTop: 20,
+                      paddingBottom: 20,
+                      boxShadow: "none",
+                      backgroundColor: "var(--container-color)",
+                    },
+                  }}
+                  className="header-menu"
+                  id="menu-appbar"
+                  anchorEl={anchorElNav}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElNav)}
+                  onClose={() => {
+                    setAnchorElNav(null);
+                  }}
+                >
+                  {Nav_Menu.map((page, index) => (
+                    <MenuItem
+                      key={index}
+                      onClick={() => handleCloseNavMenu(page.path || "")}
+                      sx={{
+                        height: 80,
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      {page.text === "Log In" && userName !== "" ? (
+                        <>
+                          <Typography color={"var(--text-color)"} fontWeight={600}
+                              fontSize={18}>
+                            Profile
+                          </Typography>
+                          <Button
+                            variant="contained"
+                            onClick={() => logoutUser()}
+                            sx={{
+                              backgroundColor: "rgba(58, 173, 144, 0.837)",
+                              fontWeight: "800",
+                              "&:hover": {
+                                backgroundColor: "rgba(58, 173, 144, 0.837)",
+                              },
+                            }}
+                          >
+                            Log out
+                          </Button>
+                        </>
+                      ) : (
+                        <>
+                          <Typography
+                            textAlign="center"
+                            sx={{
+                              fontWeight: 700,
+                              fontSize: 18,
+                              color: "var(--text-color)",
+                            }}
+                          >
+                            {page.text}
+                          </Typography>
+                          <ListItemIcon>
+                            <CallMadeIcon
+                              fontSize="small"
+                              sx={{ color: "var(--text-color)" }}
+                            />
+                          </ListItemIcon>
+                        </>
+                      )}
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
+            </Toolbar>
+          </Container>
+        </AppBar>
+      </Box>
     </div>
   );
 };

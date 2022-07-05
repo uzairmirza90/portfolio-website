@@ -44,13 +44,15 @@ const UserSignUp: React.FC<UserSignUpInterface> = ({
             Sign up
           </Typography>
           {notify !== "" ? (
-            <Alert severity={loggedIn ? "success" : "error"}>{notify}</Alert>
+            <Alert severity={loggedIn ? "success" : "error"}
+            sx={{ width: "100%", marginTop: 4 }}
+            >{notify}</Alert>
           ) : (
             notify
           )}
           {loggedIn ? (
             <Box sx={{ display: "flex", marginTop: 15 }}>
-              <CircularProgress size={60} />
+              <CircularProgress size={50} sx={{color: 'rgba(58, 173, 144, 0.837)'}} />
             </Box>
           ) : (
             <Box
@@ -68,7 +70,7 @@ const UserSignUp: React.FC<UserSignUpInterface> = ({
                 name="name"
                 autoComplete="name"
                 autoFocus
-                onChange={() => setNotify("")}
+           
               />
 
               <TextField
@@ -80,7 +82,7 @@ const UserSignUp: React.FC<UserSignUpInterface> = ({
                 name="email"
                 autoComplete="email"
                 autoFocus
-                onChange={() => setNotify("")}
+                
               />
 
               <TextField
@@ -93,7 +95,7 @@ const UserSignUp: React.FC<UserSignUpInterface> = ({
                 id="password"
                 autoComplete="new-password"
                 autoFocus
-                onChange={() => setNotify("")}
+           
               />
 
               <TextField
@@ -106,20 +108,21 @@ const UserSignUp: React.FC<UserSignUpInterface> = ({
                 id="confirmpassword"
                 autoComplete="new-confirmpassword"
                 autoFocus
-                onChange={() => setNotify("")}
+         
               />
 
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 3, mb: 2, backgroundColor: 'rgba(58, 173, 144, 0.837)' }}
               >
                 Sign Up
               </Button>
-              <Grid container justifyContent="flex-end">
+              <Grid container justifyContent="center">
                 <Grid item>
-                  <Link to={"/login"}>Already have an account? Sign in</Link>
+                  <Link to={"/login"} style={{textDecoration: 'none'}}>
+                    <Typography color='var(--text-color)'>Already have an account? <span style={{color: 'rgba(58, 173, 144, 0.837)', textDecoration: 'underline'}}>Sign In</span></Typography></Link>
                 </Grid>
               </Grid>
             </Box>

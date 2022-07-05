@@ -41,7 +41,7 @@ const UserSignIn: React.FC<UserSignInInterface> = ({
   handleLoginSubmit,
 }) => {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={lightTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -61,7 +61,7 @@ const UserSignIn: React.FC<UserSignInInterface> = ({
           {notify !== "" ? (
             <Alert
               severity={loggedIn ? "success" : "error"}
-              sx={{ width: "100%" }}
+              sx={{ width: "100%", marginTop: 4 }}
             >
               {notify}
             </Alert>
@@ -70,7 +70,7 @@ const UserSignIn: React.FC<UserSignInInterface> = ({
           )}
           {loggedIn ? (
             <Box sx={{ display: "flex", marginTop: 15 }}>
-              <CircularProgress size={60} />
+              <CircularProgress size={50} sx={{color: 'rgba(58, 173, 144, 0.837)'}}/>
             </Box>
           ) : (
             <Box
@@ -88,7 +88,7 @@ const UserSignIn: React.FC<UserSignInInterface> = ({
                 name="email"
                 autoComplete="email"
                 autoFocus
-                onChange={() => setNotify("")}
+               
               />
               <TextField
                 margin="normal"
@@ -99,21 +99,21 @@ const UserSignIn: React.FC<UserSignInInterface> = ({
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                onChange={() => setNotify("")}
+              
               />
 
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 3, mb: 2 , backgroundColor: 'rgba(58, 173, 144, 0.837)'}}
               >
                 Sign In
               </Button>
               <Grid container justifyContent={'center'}>
                 <Grid item>
-                  <Link to="/signup">
-                    <Typography sx={{color: 'rgba(58, 173, 144, 0.837)'}}>"Don't have an account? Sign Up"</Typography>
+                  <Link to="/signup" style={{textDecoration: 'none'}}>
+                    <Typography color='var(--text-color)'>"Don't have an account? <span style={{color: 'rgba(58, 173, 144, 0.837)', textDecoration: 'underline'}}>Sign Up</span>"</Typography>
                   </Link>
                 </Grid>
               </Grid>
